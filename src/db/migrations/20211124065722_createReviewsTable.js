@@ -3,16 +3,10 @@ exports.up = function(knex) {
         table.increments("review_id").primary();
         table.text("content");
         table.integer("score");
-        table.integer("critic_id").unsigned().notNullable();
-        table.foreign("critic_id");
-        table.references("critic_id");
-        table.inTable("critics");
-        table.onDelete("cascade");
-        table.integer("movie_id").unsigned().notNullable();
-        table.foreign("movie_id");
-        table.references("movie_id");
-        table.inTable("movies");
-        table.onDelete("cascade");
+        table.integer("critic_id").unsigned().notNullable()
+        .references("critics.critic_id").onDelete("cascade");
+        table.integer("movie_id").unsigned().notNullable()
+        .references("movies.movie_id").onDelete("cascade");
         table.timestamps(true, true);
     });
 };
