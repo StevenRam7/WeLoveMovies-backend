@@ -2,7 +2,7 @@ const service = require("./reviews.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 
 async function reviewExists(req, res, next) {
-  const reviewX = await service.delete(req.params.reviewId);
+  const reviewX = await service.read(req.params.reviewId);
   if (reviewX) {
     res.locals.reviewX = reviewX;
     return next()
@@ -21,7 +21,7 @@ async function update(req, res, next) {
 }
 
 async function destroy(req, res, next) {
-  res.status(204).json({ data: res.locals.reviewX })
+  res.status(204).json({ data: await service.delete(req.params.reviewId) })
 }
 
 module.exports = {
