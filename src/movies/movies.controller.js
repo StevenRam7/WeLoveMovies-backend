@@ -17,11 +17,21 @@ async function list(req, res, next) {
     res.json({ data: await service.list(req.query.is_showing) })
 }
 
+async function theaterList(req, res, next) {
+    res.json({ data: await service.theaterList(req.params.movieId) })
+}
+
+async function reviewList(req, res, next) {
+    res.json({ data: await service.reviewList(req.params.movieId) })
+}
+
 async function read(req, res, next) {
   res.json({ data: res.locals.film })
 }
 
 module.exports = {
   list,
+  theaterList,
+  reviewList,
   read: [asyncErrorBoundary(movieExists), asyncErrorBoundary(read)]
 }
