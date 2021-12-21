@@ -4,7 +4,7 @@ exports.up = function(knex) {
         table.integer("movie_id").unsigned().notNullable()
         .references("movies.movie_id").onDelete("cascade");
         table.integer("theater_id").unsigned().notNullable()
-        .references("theater.theater_id").onDelete("cascade");
+        .references("theaters.theater_id").onDelete("cascade");
         table.timestamps(true, true);
     });
 };
